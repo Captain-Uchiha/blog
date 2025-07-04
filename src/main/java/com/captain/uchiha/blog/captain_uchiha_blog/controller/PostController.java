@@ -28,14 +28,21 @@ public class PostController {
 
     @GetMapping("/{postId}")
     public  ResponseEntity<PostDto> getPost(@PathVariable("postId") Long id){
-        return new ResponseEntity<>(postService.getPostById(id),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(postService.getPostById(id),HttpStatus.OK);
     }
 
     @GetMapping()
     public  ResponseEntity<List<PostDto>> getAllPost(){
-        return new ResponseEntity<>(postService.getAllPost(),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(postService.getAllPost(),HttpStatus.OK);
     }
 
+    @PutMapping("/{postId}")
+    public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto,@PathVariable("postId") Long id){
+        return new ResponseEntity<>(postService.updatePost(postDto,id), HttpStatus.OK);
+    }
 
-
+    @DeleteMapping("/{postId}")
+    public  ResponseEntity<String> deletePost(@PathVariable("postId") Long id){
+        return new ResponseEntity<>(postService.deletePost(id),HttpStatus.OK);
+    }
 }
